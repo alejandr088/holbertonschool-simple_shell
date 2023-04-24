@@ -6,10 +6,11 @@
 #include <string.h>
 
 /**
- * parse_input - Parse input string into array of arguments
- * @input: input string to parse
- * Return: array of arguments, or NULL on failure
- */
+ *  * parse_input - Parse input string into array of arguments
+ *   * @input: input string to parse
+ *    *
+ *     * Return: array of arguments, or NULL on failure
+ *      */
 char **parse_input(char *input)
 {
 	char **args = NULL;
@@ -36,19 +37,21 @@ char **parse_input(char *input)
 	}
 	args[nargs] = NULL;
 
-	return args;
+	return (args);
 }
 
 /**
- * main - Entry point
- * Return: 0 on success, 1 on failure.
- */
+ *  * main - Entry point
+ *   *
+ *    * Return: 0 on success, 1 on failure.
+ *     */
 int main(void)
 {
 	char *input;
 	char **args;
 	pid_t pid;
 	int status;
+	size_t len = 0;
 
 	while (1)
 	{
@@ -56,7 +59,7 @@ int main(void)
 		fflush(stdout);
 
 		input = NULL;
-		if (getline(&input, &(size_t){0}, stdin) == -1)
+		if (getline(&input, &len, stdin) == -1)
 		{
 			perror("getline");
 			return (1);
