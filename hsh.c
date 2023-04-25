@@ -1,19 +1,38 @@
 #include "main.h"
 
 /**
- * execute_command - execute the given command in a child process
- * @cmd: command to execute
+ * parse_input - parse input string into arguments
+ * @input: input string
+ * @args: array to store arguments
  *
- * Return: None
+ * Return: number of arguments
  */
-void execute_command(char *cmd)
+int parse_input(char *input, char *args[])
 {
-	char *args[2];
+	int argc = 0;
+	char *token;
+
+	token = strtok(input, " \t\n");
+	while (token != NULL && argc < MAX_ARG_COUNT - 1)
+	{
+		args[argc++] = token;
+		token = strtok(NULL, " \t\n");
+	}
+	args[argc] = NULL;
+
+	return (argc);
+}
+
+/**
+ * execute_command - xcute the given command in a child process
+ * @args: array of arguments
+ *
+ * Return: none
+ */
+void execute_command(char *args[])
+{
 	pid_t child_pid;
 	int status;
-
-	args[0] = cmd;
-	args[1] = NULL;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -23,15 +42,17 @@ void execute_command(char *cmd)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
-		{
-			perror("Command not found");
-			exit(1);
-		}
+		execve(args[0], args, NULL);
+		perror("Command not found");
+		exit(1);
 	}
 	else
 	{
-		wait(&status);
+		if (wait(&status) == -1)
+		{
+			perror("Error waiting for child process");
+			exit(1);
+		}
 	}
 }
 
@@ -43,6 +64,7 @@ void execute_command(char *cmd)
 int main(void)
 {
 	char input[MAX_INPUT_LENGTH];
+	char *args[MAX_ARG_COUNT];
 	int read_byte;
 
 	while (1)
@@ -62,8 +84,18 @@ int main(void)
 			printf("\n");
 			break;
 		}
-		input[read_byte - 1] = '\0';
-		execute_command(input);
+
+		if (input[read_byte - 1] == '\n')
+		{
+			input[read_byte - 1] = '\0';
+		}
+		else
+		{
+			input[read_byte] = '\0';
+		}
+
+		parse_input(input, args);
+		execute_command(args);
 	}
 	return (0);
 }
