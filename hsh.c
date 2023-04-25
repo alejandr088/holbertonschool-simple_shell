@@ -43,7 +43,7 @@ void execute_command(char *args[])
 	if (child_pid == 0)
 	{
 		execve(args[0], args, environ);
-		perror("Command not found");
+		fprintf(stderr, "%s: 1: %s: not found\n", args[0], args[0]);
 		exit(1);
 	}
 	else
@@ -52,6 +52,10 @@ void execute_command(char *args[])
 		{
 			perror("Error waiting for child process");
 			exit(1);
+		}
+		if ((!WIFEXITED(status) || WEXITSTATUS(status) != 0) && WIFSIGNALED(status))
+		{
+			fprintf(stderr, "Command exited with non-zero status\n");
 		}
 	}
 }
@@ -99,4 +103,3 @@ int main(void)
 	}
 	return (0);
 }
-
