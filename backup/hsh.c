@@ -24,7 +24,7 @@ int parse_input(char *input, char *args[])
 }
 
 /**
- * execute_command - execute the given command in a child process
+ * execute_command - xcute the given command in a child process
  * @args: array of arguments
  *
  * Return: none
@@ -42,11 +42,6 @@ void execute_command(char *args[])
 	}
 	if (child_pid == 0)
 	{
-		if (args[0] == NULL)
-		{
-			fprintf(stderr, "Invalid command.\n");
-			exit(EXIT_FAILURE);
-		}
 		execve(args[0], args, environ);
 		fprintf(stderr, "%s: 1: %s: not found\n", args[0], args[0]);
 		exit(EXIT_FAILURE);
@@ -56,7 +51,7 @@ void execute_command(char *args[])
 		if (wait(&status) == -1)
 		{
 			perror("Error waiting for child process");
-			exit(EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 		}
 		if ((!WIFEXITED(status) || WEXITSTATUS(status) != 0) && WIFSIGNALED(status))
 		{
@@ -108,4 +103,3 @@ int main(void)
 	}
 	return (0);
 }
-
