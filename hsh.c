@@ -1,16 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <string.h>
+#include "main.h"
 
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARG_COUNT 64
 
 /**
- * execute_command - Execute the given command in a child process
- * @cmd: The command to execute
+ * execute_command - xcute the given command in a child process
+ * @cmd: command to xcute
  *
  * Return: None
  */
@@ -45,9 +40,9 @@ void execute_command(char *cmd)
 }
 
 /**
- * main - Entry point of the simple shell
+ * main - entry point of the shell
  *
- * Return: 0 on success, -1 on error
+ * * Return: 0 on success, -1 on error
  */
 int main(void)
 {
@@ -76,4 +71,3 @@ int main(void)
 	}
 	return (0);
 }
-
