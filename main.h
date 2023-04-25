@@ -9,7 +9,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <errno.h>
 
 extern char **environ;
 
@@ -19,10 +18,5 @@ extern char **environ;
 /* Prototypes */
 void execute_command(char *args[]);
 int parse_input(char *input, char *args[]);
-void print_error(char *arg, int count);
-int is_empty_string(const char *s);
-int is_whitespace(char c);
-int is_delimiter(char c);
-char *strip_whitespace(char *s);
-
+int main(void);
 #endif /* MAIN_H */

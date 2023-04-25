@@ -1,36 +1,28 @@
 #include "main.h"
-
 /**
  * parse_input - parse input string into arguments
- * @input: the input string
- * @args: array of pointers to store the arguments
- * Return: number of arguments, or -1 on failure
+ * @input: input string
+ * @args: array to store arguments
+ * Return: number of arguments
  */
 int parse_input(char *input, char *args[])
 {
+	int argc = 0;
 	char *token;
-	int i = 0;
 
 	token = strtok(input, " \t\n");
-	while (token != NULL && i < MAX_ARG_COUNT - 1)
+	while (token != NULL && argc < MAX_ARG_COUNT - 1)
 	{
-		args[i] = token;
+		args[argc++] = token;
 		token = strtok(NULL, " \t\n");
-		i++;
 	}
-	args[i] = NULL;
+	args[argc] = NULL;
 
-	if (i == MAX_ARG_COUNT - 1 && token != NULL)
-	{
-		print_error(args[0], 2);
-		return (-1);
-	}
-
-	return (i);
+	return (argc);
 }
 
 /**
- * execute_command - execute the given command in a child process
+ * execute_command - xcute the given command in a child process
  * @args: array of arguments
  * Return: none
  */
@@ -47,27 +39,8 @@ void execute_command(char *args[])
 	}
 	if (child_pid == 0)
 	{
-		char *path = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";
-		char *path_copy = strdup(path);
-		char *dir = strtok(path_copy, ":");
-		char *cmd_path = NULL;
-
-		while (dir)
-		{
-			cmd_path = malloc(strlen(dir) + strlen(args[0]) + 2);
-			if (cmd_path == NULL)
-			{
-				perror("malloc");
-				exit(EXIT_FAILURE);
-			}
-
-			sprintf(cmd_path, "%s/%s", dir, args[0]);
-			execve(cmd_path, args, environ);
-			free(cmd_path);
-			dir = strtok(NULL, ":");
-		}
-		print_error(args[0], 1);
-		print_error(args[0], 1);
+		execve(args[0], args, environ);
+		fprintf(stderr, "%s: 1: %s: not found\n", args[0], args[0]);
 		exit(1);
 	}
 	else
@@ -86,7 +59,6 @@ void execute_command(char *args[])
 
 /**
  * main - entry point of the shell
- *
  * Return: 0 on success, -1 on error
  */
 int main(void)
@@ -126,32 +98,4 @@ int main(void)
 		execute_command(args);
 	}
 	return (0);
-}
-
-/**
- * print_error - print error messages
- * @command: the command that failed
- * @error_code: the error code
- * Return: none
- */
-void print_error(char *command, int error_code)
-{
-	switch (error_code)
-	{
-		case 1:
-			fprintf(stderr, "%s: command not found\n", command);
-			break;
-		case 2:
-			fprintf(stderr, "%s: too many arguments\n", command);
-			break;
-		case 3:
-			fprintf(stderr, "%s: not a directory\n", command);
-			break;
-		case 4:
-			perror(command);
-			break;
-		default:
-			fprintf(stderr, "%s: unknown error\n", command);
-			break;
-	}
 }
