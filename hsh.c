@@ -1,16 +1,19 @@
 #include "main.h"
 
 /**
- * execute_command - xcute the given command in a child process
- * @cmd: command to xcute
+ * execute_command - execute the given command in a child process
+ * @cmd: command to execute
  *
  * Return: None
  */
 void execute_command(char *cmd)
 {
-	const char *args[] = {cmd, NULL};
+	char *args[2];
 	pid_t child_pid;
 	int status;
+
+	args[0] = cmd;
+	args[1] = NULL;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -20,7 +23,7 @@ void execute_command(char *cmd)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(args[0], (char *const *)args, NULL) == -1)
+		if (execve(args[0], args, NULL) == -1)
 		{
 			perror("Command not found");
 			exit(1);
@@ -35,16 +38,19 @@ void execute_command(char *cmd)
 /**
  * main - entry point of the shell
  *
- * * Return: 0 on success, -1 on error
+ * Return: 0 on success, -1 on error
  */
 int main(void)
 {
 	char input[MAX_INPUT_LENGTH];
+	int read_byte;
 
 	while (1)
 	{
 		printf("($) ");
-		ssize_t read_byte = read(STDIN_FILENO, input, MAX_INPUT_LENGTH);
+		fflush(stdout);
+
+		read_byte = read(STDIN_FILENO, input, MAX_INPUT_LENGTH);
 
 		if (read_byte == -1)
 		{
@@ -59,5 +65,6 @@ int main(void)
 		input[read_byte - 1] = '\0';
 		execute_command(input);
 	}
-return (0);
+	return (0);
 }
+
