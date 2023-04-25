@@ -44,14 +44,14 @@ void execute_command(char *args[])
 	{
 		execve(args[0], args, environ);
 		fprintf(stderr, "%s: 1: %s: not found\n", args[0], args[0]);
-		exit(1);
+		exit(0);
 	}
 	else
 	{
 		if (wait(&status) == -1)
 		{
 			perror("Error waiting for child process");
-			exit(1);
+		exit(0);
 		}
 		if ((!WIFEXITED(status) || WEXITSTATUS(status) != 0) && WIFSIGNALED(status))
 		{
