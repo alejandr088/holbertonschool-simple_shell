@@ -42,7 +42,7 @@ void execute_command(char *args[])
 	}
 	if (child_pid == 0)
 	{
-		execve(args[0], args, NULL);
+		execve(args[0], args, environ);
 		perror("Command not found");
 		exit(1);
 	}
