@@ -1,8 +1,5 @@
 #include "main.h"
 
-#define MAX_INPUT_LENGTH 1024
-#define MAX_ARG_COUNT 64
-
 /**
  * execute_command - xcute the given command in a child process
  * @cmd: command to xcute
@@ -11,13 +8,9 @@
  */
 void execute_command(char *cmd)
 {
-	char *args[3];
+	const char *args[] = {cmd, NULL};
 	pid_t child_pid;
 	int status;
-
-	args[0] = cmd;
-	args[1] = NULL;
-	args[2] = NULL;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -27,7 +20,7 @@ void execute_command(char *cmd)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
+		if (execve(args[0], (char *const *)args, NULL) == -1)
 		{
 			perror("Command not found");
 			exit(1);
@@ -51,23 +44,20 @@ int main(void)
 	while (1)
 	{
 		printf("($) ");
-		if (fgets(input, MAX_INPUT_LENGTH, stdin) == NULL)
+		ssize_t read_byte = read(STDIN_FILENO, input, MAX_INPUT_LENGTH);
+
+		if (read_byte == -1)
 		{
-			if (feof(stdin))
-			{
-				printf("\n");
-				break;
-			}
-			else
-			{
-				perror("Error reading input");
-				return (-1);
-			}
+			perror("Error reading input");
+			return (-1);
 		}
-
-		input[strcspn(input, "\n")] = '\0';
-
+		else if (read_byte == 0)
+		{
+			printf("\n");
+			break;
+		}
+		input[read_byte - 1] = '\0';
 		execute_command(input);
 	}
-	return (0);
+return (0);
 }
