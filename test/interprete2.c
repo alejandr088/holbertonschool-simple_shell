@@ -4,16 +4,15 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-extern char **environ;
-
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARG_COUNT 64
 
+extern char **environ;
 /**
  * execute_command - Execute a command in a child process.
  *
  * @args: Array of arguments for the command.
- * @background: Indicates whether the process bckgrnd or frgrnd.
+ * @background: Indicates whether the process should bckgd or fgd (0).
  */
 void execute_command(char *args[], int background)
 {
@@ -44,33 +43,31 @@ void execute_command(char *args[], int background)
 }
 
 /**
- * parse_input - parse user input into separate arguments.
+ * parse_input - parse the input string into an array of arguments.
  *
- * @input: The user input.
- * @args: Array to store the arguments.
- *
- * Return: The number of parsed arguments.
+ * @input: Input string to parse.
+ * @args: Array of arguments to store the parsed arguments.
+ * Return: Number of arguments parsed.
  */
 int parse_input(char *input, char *args[])
 {
 	int arg_count = 0;
-	char *arg;
+	char *token;
 
-	arg = strtok(input, " \t\n");
-	while (arg != NULL && arg_count < MAX_ARG_COUNT - 1)
+	token = strtok(input, " \t\n");
+	while (token != NULL)
 	{
-		args[arg_count++] = arg;
-		arg = strtok(NULL, " \t\n");
+		args[arg_count++] = token;
+		token = strtok(NULL, " \t\n");
 	}
-	args[arg_count] = NULL;
 
+	args[arg_count] = NULL;
 	return (arg_count);
 }
-
 /**
- * main - function of the program.
+ * main - main function.
  *
- * Return: Always 0.
+ * Return: always 0.
  */
 int main(void)
 {
@@ -81,25 +78,29 @@ int main(void)
 
 	while (1)
 	{
-		printf("($) ");
-		fflush(stdout);
-
-		if (fgets(input, MAX_INPUT_LENGTH, stdin) == NULL)
-		{
-			printf("\n");
-			break;
-		}
+		printf("myshell> ");
+		fgets(input, MAX_INPUT_LENGTH, stdin);
+		input[strcspn(input, "\n")] = '\0';
 
 		background = 0;
-		if (input[strlen(input) - 2] == '&')
+		if (input[strlen(input) - 1] == '&')
 		{
 			background = 1;
-			input[strlen(input) - 2] = '\0';
+			input[strlen(input) - 1] = '\0';
 		}
 
 		arg_count = parse_input(input, args);
-
-		execute_command(args, background);
+		if (arg_count > 0)
+		{
+			if (strcmp(args[0], "exit") == 0)
+			{
+				exit(0);
+			}
+			else
+			{
+				execute_command(args, background);
+			}
+		}
 	}
 
 	return (0);

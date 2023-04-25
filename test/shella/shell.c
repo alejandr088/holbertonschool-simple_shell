@@ -1,5 +1,4 @@
 #include "shell.h"
-#include <stdio.h>
 #define _GNU_SOURCE
 
 /**
