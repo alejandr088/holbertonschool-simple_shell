@@ -19,5 +19,6 @@ extern char **environ;
 void execute_command(char *args[]);
 void sigint_handler(int signo);
 int parse_input(char *input, char *args[]);
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 
 #endif /* MAIN_H */

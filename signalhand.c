@@ -11,7 +11,6 @@ void sigint_handler(int signo)
 	if (signo == SIGINT)
 	{
 		printf("\nSIGINT signal received. Continuing...\n");
-		printf("($) ");
 		fflush(stdout);
 	}
 }
