@@ -34,7 +34,7 @@ void execute_command(char *args[])
 	pid_t child_pid;
 	int status;
 
-	child_pid = fork();
+	child_pid = fork(); /* crea child process */
 	if (child_pid == -1)
 	{
 		perror("Error forking child process");
@@ -53,13 +53,14 @@ void execute_command(char *args[])
 	}
 	else
 	{
-		if (wait(&status) == -1)
+		if (wait(&status) == -1) /* si el wait falla, imprime y sale */
 		{
 			perror("Error waiting for child process");
 			exit(EXIT_SUCCESS);
 		}
 		if ((!WIFEXITED(status) || WEXITSTATUS(status) != 0) && WIFSIGNALED(status))
-		{
+		{ /* 1er () - si proceso no termino OK (SIN signal, o c/codigo de error) */
+			/* 2da parte - si process termino c/señal */
 			fprintf(stderr, "Command exited with non-zero status\n");
 		}
 	}
