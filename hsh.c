@@ -48,7 +48,7 @@ void execute_command(char *args[])
 			exit(EXIT_FAILURE);
 		}
 		execve(args[0], args, environ);
-		fprintf(stderr, "%s: 1: %s: not found\n", args[0], args[0]);
+		fprintf(stderr, "%s: not found\n", args[0]);
 		exit(EXIT_FAILURE);
 	}
 	else
