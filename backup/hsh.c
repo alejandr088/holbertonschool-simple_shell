@@ -11,6 +11,9 @@ int parse_input(char *input, char *args[])
 {
 	int argc = 0;
 	char *token;
+	size_t offset = strspn(input, " \t\n");
+
+	input += offset;
 
 	token = strtok(input, " \t\n");
 	while (token != NULL && argc < MAX_ARG_COUNT - 1)
@@ -53,7 +56,7 @@ void execute_command(char *args[])
 	}
 	else
 	{
-		if (waitpid(child_pid, &status, 0) == -1)
+		if (wait(&status) == -1) /* si el wait falla, imprime y sale */
 		{
 			perror("Error waiting for child process");
 			exit(EXIT_SUCCESS);
