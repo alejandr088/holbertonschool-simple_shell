@@ -11,36 +11,36 @@ int main(void)
 	char *args[MAX_ARG_COUNT];
 	int read_byte;
 
-	signal(SIGINT, sigint_handler);
-	while (1)
+	signal(SIGINT, sigint_handler); /* maneja la señal */
+	while (1) /* bucle infinito para ejecutar el shell */
 	{
 		printf("($) ");
-		fflush(stdout);
+		fflush(stdout); /* limpia buffer de salida */
 
-		read_byte = read(STDIN_FILENO, input, MAX_INPUT_LENGTH);
+		read_byte = read(STDIN_FILENO, input, MAX_INPUT_LENGTH); /* lee input */
 
-		if (read_byte == -1)
+		if (read_byte == -1) /* comprueba errores al leer input */
 		{
 			perror("Error reading input");
 			return (-1);
 		}
-		else if (read_byte == 0)
+		else if (read_byte == 0) /* maneja EOF o linea vacia */
 		{
 			printf("\n");
 			break;
 		}
 
-		if (input[read_byte - 1] == '\n')
+		if (input[read_byte - 1] == '\n') /* verifica si hay un SL al final */
 		{
-			input[read_byte - 1] = '\0';
+			input[read_byte - 1] = '\0'; /* agrega el car null al final */
 		}
 		else
 		{
-			input[read_byte] = '\0';
+			input[read_byte] = '\0'; /* agrega el car null al final */
 		}
 
-		parse_input(input, args);
-		execute_command(args);
+		parse_input(input, args); /* llama a la funcion parse */
+		execute_command(args); /* llama a func execute */
 	}
 	return (0);
 }
