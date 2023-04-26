@@ -11,6 +11,7 @@ int main(void)
 	char *args[MAX_ARG_COUNT];
 	int read_byte;
 
+	signal(SIGINT, sigint_handler);
 	while (1)
 	{
 		printf("($) ");
@@ -43,3 +44,4 @@ int main(void)
 	}
 	return (0);
 }
+

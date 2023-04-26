@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <signal.h>
 
 extern char **environ;
 
@@ -16,7 +17,7 @@ extern char **environ;
 
 /* Prototypes */
 void execute_command(char *args[]);
+void sigint_handler(int signo);
 int parse_input(char *input, char *args[]);
-int main(void);
 
 #endif /* MAIN_H */
