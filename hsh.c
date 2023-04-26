@@ -11,6 +11,9 @@ int parse_input(char *input, char *args[])
 {
 	int argc = 0;
 	char *token;
+	size_t offset = strspn(input, " \t\n");
+
+	input += offset;
 
 	token = strtok(input, " \t\n");
 	while (token != NULL && argc < MAX_ARG_COUNT - 1)
