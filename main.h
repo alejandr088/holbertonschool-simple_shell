@@ -1,24 +1,25 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-/* Constants */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+#include <string.h>
 #include <sys/wait.h>
 #include <sys/types.h>
-#include <signal.h>
-
-extern char **environ;
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARG_COUNT 64
+#define TOK_DELIM " \t\r\n\a"
 
-/* Prototypes */
-void execute_command(char *args[]);
-void sigint_handler(int signo);
-int parse_input(char *input, char *args[]);
+/* Function Declarations */
+void loop(void);
+char *read_line(void);
+char **split_line(char *line);
+int execute_command(char **args);
+char **tokenize(char *input);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 
-#endif /* MAIN_H */
+#endif

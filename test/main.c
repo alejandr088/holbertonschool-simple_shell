@@ -1,37 +1,34 @@
 #include "main.h"
-/**
- * main - entry point of the shell
- *
- * Return: 0 on success, -1 on error
- */
+#define _GNU_SOURCE
 
+/**
+ * main - Entry point for the custom shell
+ *
+ * Return: Always 0 on success, 1 on failure
+ */
 int main(void)
 {
-	char *line = NULL;
-	char *args[MAX_ARG_COUNT];
+	char *line = NULL, **args = NULL;
+	char *prompt = "($) ";
 	size_t len = 0;
-	ssize_t read;
-	int argc;
-
-	signal(SIGINT, sigint_handler);
+	ssize_t read_byte = 0;
+	int status = 0;
 
 	while (1)
 	{
-		printf("($) ");
-		read = getline(&line, &len, stdin);
-		if (read == -1)
-		{
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, prompt, 5);
+
+		read_byte = getline(&line, &len, stdin);
+		if (read_byte == -1)
 			break;
-		}
-		argc = parse_input(line, args);
-		if (argc > 0)
-		{
-			execute_command(args);
-		}
+
+		args = tokenize(line);
+		status = execute_command(args);
+
+		free(args);
 	}
 
 	free(line);
-	line = NULL;
-
-	return (EXIT_SUCCESS);
+	return (status);
 }

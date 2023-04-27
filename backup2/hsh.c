@@ -12,14 +12,21 @@ int parse_input(char *input, char *args[])
 	int argc = 0;
 	char *token;
 
+	input[strcspn(input, "\n")] = '\0';
+
+	if (strspn(input, " \t\n") == strlen(input))
+		return (0);
+
 	token = strtok(input, " \t\n");
 	while (token != NULL && argc < MAX_ARG_COUNT - 1)
 	{
 		args[argc++] = token;
+		while (*token && (*token == ' ' || *token == '\t'))
+		{
+			token++;
+		}
 		token = strtok(NULL, " \t\n");
 	}
-	args[argc] = NULL;
-
 	return (argc);
 }
 
