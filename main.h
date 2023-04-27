@@ -13,6 +13,7 @@
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARG_COUNT 64
 #define TOK_DELIM " \t\r\n\a"
+#define ARG_DELIM "-"
 
 /* Function Declarations */
 void loop(void);
