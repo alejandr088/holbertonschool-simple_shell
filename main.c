@@ -1,18 +1,24 @@
 #include "main.h"
-#define _GNU_SOURCE
 
 /**
  * main - Entry point for shell
  *
  * Return: Always 0 on success, 1 on failure
  */
-int main(void)
+int main(int argc, char **argv)
 {
 	char *line = NULL, **args = NULL;
 	char *prompt = "($) ";
 	size_t len = 0;
 	ssize_t read_byte = 0;
 	int status = 0;
+
+	if (argc > 1)
+	{
+		args = &argv[1];
+		status = execute_command(args);
+		return status;
+	}
 
 	while (1)
 	{
@@ -24,7 +30,7 @@ int main(void)
 			break;
 
 		args = tokenize(line);
-		status = exe_command(args);
+		status = execute_command(args);
 
 		free(args);
 	}
