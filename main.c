@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	{
 		args = &argv[1];
 		status = execute_command(args);
-		return status;
+		return (status);
 	}
 
 	while (1)

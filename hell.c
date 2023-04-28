@@ -1,49 +1,48 @@
 #include "main.h"
 
 /**
- * execute_command - Executes a command with its arguments
- * @args: array of arguments to execute
+ * execute_command - execute a command
+ * @cmd: command to execute
  *
- * Return: exit status of the command
+ * Return: 0 on success, -1 on failure
  */
-int execute_command(char **args)
+int execute_command(char **cmd)
 {
-    pid_t child_pid = 0;
-    int status = 0;
-    char *exe_path;
+    char *path = NULL;
+    pid_t pid;
 
-    if (args == NULL || args[0] == NULL)
-        return (0);
-    exe_path = find_executable_path(args[0]);
-    if (exe_path == NULL)
+    if (cmd[0] == NULL)
     {
-        fprintf(stderr, "%s: command not found\n", args[0]);
-        return (127);
+        return (-1);
     }
-    args[0] = exe_path;
-    child_pid = fork();
-    if (child_pid == -1)
+
+    pid = fork();
+    if (pid == -1)
     {
-        perror("Error: fork");
-        free(exe_path);
-        return (1);
+        perror("Error");
+        return (-1);
     }
-    if (child_pid == 0)
+
+    if (pid == 0)
     {
-        if (execve(args[0], args, environ) == -1)
+        path = find_executable_path(cmd[0]);
+        if (path == NULL)
         {
-            perror("Error: execve");
-            free(exe_path);
-            _exit(1);
+            exit(EXIT_FAILURE);
         }
+        execve(path, cmd, environ);
+        perror("Error");
+        exit(EXIT_FAILURE);
     }
     else
     {
-        wait(&status);
+        wait(NULL);
     }
-    free(exe_path);
-    return (status);
+
+    free(path); 
+    return (0);
 }
+
 
 
 /**
@@ -57,7 +56,7 @@ char **tokenize(char *line)
     int bufsize = MAX_ARG_COUNT;
     int position = 0;
     char **tokens = malloc(bufsize * sizeof(char *));
-    char *token;
+    char *token, **tmp;
 
     if (!tokens)
     {
@@ -74,12 +73,14 @@ char **tokenize(char *line)
         if (position >= bufsize)
         {
             bufsize += MAX_ARG_COUNT;
-            tokens = realloc(tokens, bufsize * sizeof(char *));
-            if (!tokens)
+            tmp = realloc(tokens, bufsize * sizeof(char *));
+            if (!tmp)
             {
                 fprintf(stderr, "Error: allocation error\n");
+                free(tokens);
                 exit(EXIT_FAILURE);
             }
+            tokens = tmp;
         }
 
         token = strtok(NULL, TOK_DELIM);
