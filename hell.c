@@ -1,37 +1,38 @@
 #include "main.h"
 
 /**
- * execute_command - Executes a command with its arguments
- * @args: An array of arguments to execute
+ * exe_command - Executes a command with its arguments
+ * @args: array of arguments to execute
  *
- * Return: The exit status of the command
+ * Return: exit status of the command
  */
-int execute_command(char **args)
+int exe_command(char **args)
 {
 	pid_t child_pid = 0;
 	int status = 0;
+	char *exe_path;
 
 	if (args == NULL || args[0] == NULL)
 		return (0);
-
-	if (access(args[0], X_OK) != 0)
+	exe_path = find_executable_path(args[0]);
+	if (exe_path == NULL)
 	{
-		fprintf(stderr, "Error: command not found\n");
 		return (1);
 	}
-
+	args[0] = exe_path;
 	child_pid = fork();
 	if (child_pid == -1)
 	{
 		perror("Error: fork");
+		free(exe_path);
 		return (1);
 	}
-
 	if (child_pid == 0)
 	{
 		if (execve(args[0], args, NULL) == -1)
 		{
 			perror("Error: execve");
+			free(exe_path);
 			_exit(1);
 		}
 	}
@@ -39,7 +40,7 @@ int execute_command(char **args)
 	{
 		wait(&status);
 	}
-
+	free(exe_path);
 	return (status);
 }
 

@@ -2,7 +2,7 @@
 #define _GNU_SOURCE
 
 /**
- * main - Entry point for the custom shell
+ * main - Entry point for shell
  *
  * Return: Always 0 on success, 1 on failure
  */
@@ -24,7 +24,7 @@ int main(void)
 			break;
 
 		args = tokenize(line);
-		status = execute_command(args);
+		status = exe_command(args);
 
 		free(args);
 	}
