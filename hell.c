@@ -17,7 +17,8 @@ int exe_command(char **args)
 	exe_path = find_executable_path(args[0]);
 	if (exe_path == NULL)
 	{
-		return (1);
+		fprintf(stderr, "%s: command not found\n", args[0]);
+		return (127);
 	}
 	args[0] = exe_path;
 	child_pid = fork();
