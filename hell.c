@@ -86,5 +86,5 @@ char **tokenize(char *line)
         token = strtok(NULL, TOK_DELIM);
     }
     tokens[position] = NULL;
-    return tokens;
+    return (tokens);
 }
