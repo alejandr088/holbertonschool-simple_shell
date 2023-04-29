@@ -2,6 +2,7 @@
 
 /**
  * execute_command - execute a command
+<<<<<<< HEAD
  * @cmd: command to execute
  *
  * Return: 0 on success, -1 on failure
@@ -45,6 +46,41 @@ int execute_command(char **cmd)
 
 
 
+=======
+ * @args: command to execute with arguments
+ *
+ * Return: 0 on success, -1 on failure
+ */
+int execute_command(char **args)
+{
+	pid_t pid;
+	int status;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("Error: fork error\n");
+		return (-1);
+	}
+	else if (pid == 0)
+	{
+		if (execve(args[0], args, NULL) == -1)
+		{
+			perror("Error: execve error\n");
+			return (-1);
+		}
+	}
+	else
+	{
+		do {
+			waitpid(pid, &status, WUNTRACED);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	}
+
+	return (0);
+}
+
+>>>>>>> 913e3891dfc0d86461431fb97772449cc6c07db6
 /**
  * tokenize - Tokenizes a string of arguments
  * @line: string of arguments to tokenize
@@ -86,5 +122,9 @@ char **tokenize(char *line)
         token = strtok(NULL, TOK_DELIM);
     }
     tokens[position] = NULL;
+<<<<<<< HEAD
     return (tokens);
+=======
+    return tokens;
+>>>>>>> 913e3891dfc0d86461431fb97772449cc6c07db6
 }
