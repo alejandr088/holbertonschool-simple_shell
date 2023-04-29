@@ -13,6 +13,7 @@ int execute_command(char **args)
 
 	if (args == NULL || args[0] == NULL)
 		return (0);
+
 	if (strcmp(args[0], "exit") == 0)
 	{
 		exit(0);
@@ -35,6 +36,12 @@ int execute_command(char **args)
 	else
 	{
 		wait(&status);
+
+		if (WIFEXITED(status))
+                        status = WEXITSTATUS(status);
+
+                if (status != 0)
+                        exit(status);
 	}
 
 	return (status);
