@@ -4,7 +4,7 @@
  * execute_command - Executes a command with its arguments
  * @args: An array of arguments to execute
  *
- * Return: The exit status of the command
+ * Return: 0 on success, 1 on error
  */
 int execute_command(char **args)
 {
@@ -18,6 +18,7 @@ int execute_command(char **args)
 	{
 		exit(0);
 	}
+
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -27,10 +28,17 @@ int execute_command(char **args)
 
 	if (child_pid == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
+		char *exe_path = find_executable_path(args[0]);
+		if (exe_path == NULL)
+		{
+			fprintf(stderr, "/hsh: 1: %s: not found\n", args[0]);
+			exit(1);
+		}
+
+		if (execve(exe_path, args, NULL) == -1)
 		{
 			perror("Error: execve");
-			_exit(1);
+			exit(1);
 		}
 	}
 	else
@@ -38,13 +46,12 @@ int execute_command(char **args)
 		wait(&status);
 
 		if (WIFEXITED(status))
-                        status = WEXITSTATUS(status);
+			status = WEXITSTATUS(status);
 
-                if (status != 0)
-                        exit(status);
+		if (status != 0)
+			return (1);
 	}
-
-	return (status);
+	return (0);
 }
 
 /**
