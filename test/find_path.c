@@ -45,7 +45,7 @@ char *find_executable_path(char *exe_name)
             free(exe_path);
         }
     }
-    fprintf(stderr, "/hsh: 1: %s: not found\n", exe_name);
+    fprintf(stderr, "%s: 1: %s: not found\n", exe_name, exe_name);
     free(path_copy);
     return (NULL);
 }
