@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * find_executable_path - function to find path
  * @exe_name: name for exe to search
@@ -9,7 +8,7 @@
 char *find_executable_path(char *exe_name)
 {
 	char *path = NULL, **env, *dir = NULL, *exe_path, *path_copy;
-	
+
 	for (env = environ; *env != NULL; env++)
 	{
 		if (strncmp(*env, "PATH=", 5) == 0)
@@ -18,7 +17,6 @@ char *find_executable_path(char *exe_name)
 			break;
 		}
 	}
-
 	if (path == NULL)
 	{
 		fprintf(stderr, "Error: PATH environment variable not found\n");
