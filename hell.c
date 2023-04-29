@@ -13,7 +13,18 @@ int execute_command(char **args)
 
 	if (args == NULL || args[0] == NULL)
 		return (0);
-
+	if (strcmp(args[0], "exit") == 0)
+	{
+		if (args[1] != NULL)
+		{
+			status = atoi(args[1]);
+			exit(status);
+		}
+		else
+		{
+			exit(0);
+		}
+	}
 	child_pid = fork();
 	if (child_pid == -1)
 	{
