@@ -34,7 +34,10 @@ int execute_command(char **args)
 
 	if (child_pid == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
+		char *exe_path = find_executable_path(args[0]);
+		if (exe_path == NULL)
+			_exit(127);
+		if (execve(exe_path, args, NULL) == -1)
 		{
 			perror("Error: execve");
 			_exit(1);
@@ -89,4 +92,3 @@ char **tokenize(char *line)
 	tokens[position] = NULL;
 	return (tokens);
 }
-
