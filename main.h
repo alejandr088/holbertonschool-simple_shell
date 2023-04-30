@@ -19,6 +19,7 @@ int execute_command(char **args);
 char **tokenize(char *input);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 
+/* external globals */
 extern char **environ;
 
 #endif
