@@ -25,7 +25,7 @@ This is a simple UNIX command line interpreter, also known as a shell, developed
 
 <details>
 <summary><h3>Usage</h3></summary>
-To use the simple shell, compile the source files using the provided gcc command:
+<b>To use the simple shell, compile the source files using the provided gcc command:</b>
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 Once compiled, run the shell using the following command (basic mandatory shell):
@@ -36,20 +36,22 @@ The shell will display a prompt and wait for the user to enter a command. Comman
 
 <details>
 <summary><h3>Features</h3></summary>
-The simple shell provides the following features:
+<b>The simple shell provides the following features:</b>
 Displaying a prompt and waiting for the user to enter a command
 Executing commands entered by the user
 Handling errors, such as command not found
 Handling the EOF "end of file" condition (Ctrl+D)
 
-The following features are not implemented in the simple shell:
+<b>The following features are not implemented in the simple shell:</b>
 Handling special characters such as ", ', `, , *, &, #
-Moving the cursor
+Handling exit function.
+Moving the cursor.
+Some other advanced functions.
 </details>
 
 <details>
 <summary><h3>Files</h3></summary>
-The following files are included in this repository:
+<b>The following files are included in this repository:</b>
 
 [README.md](#README.md): This file, providing documentation for the simple shell.
 
@@ -66,14 +68,14 @@ The following files are included in this repository:
 
 <details>
 <summary><h3>Contributors</h3></summary>
-The following individuals have contributed to the development of the simple shell:
+<b>The following individuals have contributed to the development of the simple shell:</b>
 Alejandro Rivello: Implemented basic command execution logic, implemented built-ins, handled error conditions.
 Alan Garcia: Handled error conditions and "end of file" condition.
 </details>
 
 <details>
 <summary><h3>Contact</h3></summary>
-For any inquiries or issues regarding the simple shell, please contact the project maintainers:
+<b<For any inquiries or issues regarding the simple shell, please contact the project maintainers:</b>
 Alejandro Rivello (jrivello21@gmail.com)
 Alan Garcia (avillafan868@gmail.com)
 </details>
