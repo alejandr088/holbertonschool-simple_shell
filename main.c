@@ -2,16 +2,27 @@
 #define _GNU_SOURCE
 
 /**
+ * handle_sigint - funct to handle signal CTRL+C
+ * 
+*/
+void handle_sigint()
+{
+}
+
+/**
  * main - Entry point for the custom shell
  *
  * Return: Always 0 on success, 1 on failure
  */
 int main(void)
 {
+
 	char *line = NULL, **args = NULL, *prompt = "($) ";
 	int status = 0;
 	size_t len = 0;
 	ssize_t read_byte = 0;
+
+	signal(SIGINT, handle_sigint);
 
 	while (1)
 	{

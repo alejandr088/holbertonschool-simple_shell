@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <signal.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -17,6 +18,7 @@
 /* Function Declarations */
 int execute_command(char **args);
 char **tokenize(char *input);
+void handle_sigint();
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 
 /* external globals */
