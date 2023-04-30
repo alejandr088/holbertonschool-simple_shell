@@ -35,35 +35,6 @@ int main(void)
 				}
 				status = 0;
 			}
-			else if (strcmp(args[0], "cd") == 0)
-			{
-				if (args[1] == NULL)
-				{
-					fprintf(stderr, "Error: expected argument to \"cd\"\n");
-					status = 1;
-				}
-				else
-				{
-					if (chdir(args[1]) != 0)
-					{
-						perror("Error");
-						status = 1;
-					}
-					else
-					{
-						status = 0;
-					}
-				}
-			}
-			else if (strcmp(args[0], "exit") == 0)
-			{
-				status = 0;
-				break;
-			}
-			else
-			{
-				status = execute_command(args);
-			}
 		}
 		free(args);
 	}
