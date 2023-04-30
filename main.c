@@ -12,7 +12,7 @@ int main(void)
 	int status = 0;
 	size_t len = 0;
 	ssize_t read_byte = 0;
-	
+
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -28,6 +28,7 @@ int main(void)
 			if (strcmp(args[0], "env") == 0)
 			{
 				char **env_var = environ;
+				
 				while (*env_var != NULL)
 				{
 					printf("%s\n", *env_var);
