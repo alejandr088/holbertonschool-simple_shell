@@ -50,6 +50,7 @@ Moving the cursor
 <details>
 <summary><h3>Files</h3></summary>
 The following files are included in this repository:
+
 [README.md](#README.md): This file, providing documentation for the simple shell
 man_1_simple_shell: A manual page for the simple shell, detailing its usage and features
 [AUTHORS](#AUTHORS): A file listing all individuals who have contributed content to the repository, following the format specified in Docker
