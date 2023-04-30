@@ -36,6 +36,10 @@ int main(void)
 				}
 				status = 0;
 			}
+			else
+			{
+				status = execute_command(args);
+			}
 		}
 		free(args);
 	}
