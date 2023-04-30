@@ -69,22 +69,23 @@ Some other advanced functions.
 
 <details>
 <summary><h3>Installation</h3></summary>
-  ```
+
   // clone the repository
   
   $ git clone https://github.com/alejandr088/holbertonschool-simple_shell.git
   
   $ cd holbertonschool-simple_shell
-  ```
+
 </details>
+
 <details>
-<summary> <h3>Compilation  and Testing</h3> </summary>
+<summary> <h3>Compilation</h3> </summary>
 
 <h5>Your shell will be compiled this way:</h5>
-  ```c
+
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
-  ```
-  <h5>Testing</h5>
+
+</details>
 
 <details>
 <summary><h3>Contributors</h3></summary>
