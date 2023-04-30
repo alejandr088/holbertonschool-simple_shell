@@ -16,7 +16,7 @@ int execute_command(char **args)
 
 	if (strcmp(args[0], "exit") == 0)
 	{
-		exit(0);
+		return exit_funct();
 	}
 	if (strcmp(args[0], "env") == 0)
 {
