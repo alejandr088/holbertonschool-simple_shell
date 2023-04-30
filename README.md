@@ -10,17 +10,12 @@ This is a simple UNIX command line interpreter, also known as a shell, developed
 
 <details>
 <summary><h3>Requirements</h3></summary>
- *Allowed editors: vi, vim, emac* s.
- 
- You are not allowed to use global* variables.
- 
- No more than 5 functions per file* .
- 
- It is not necessary to upload the test network to * your repository.
- 
- The prototypes of all your functions should be included in your header file called main.h.
- 
- Note that we will not provide the putchar function for this project.
+ * Allowed editors: vi, vim, emac* s.
+ * You are not allowed to use global* variables.
+ * No more than 5 functions per file* .
+ * It is not necessary to upload the test network to * your repository.
+ * The prototypes of all your functions should be included in your header file called main.h.
+ * Note that we will not provide the putchar function for this project.
 </details>
 
 <details>
