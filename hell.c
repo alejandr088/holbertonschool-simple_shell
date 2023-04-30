@@ -19,9 +19,10 @@ int execute_command(char **args)
 		exit(0);
 	}
 	if (strcmp(args[0], "env") == 0)
-{
-    return print_env();
-}
+	{
+		return print_env();
+	}
+
 	child_pid = fork();
 	if (child_pid == -1)
 	{
