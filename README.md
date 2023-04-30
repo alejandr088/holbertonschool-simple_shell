@@ -51,12 +51,16 @@ Moving the cursor
 <summary><h3>Files</h3></summary>
 The following files are included in this repository:
 
-[README.md](#README.md): This file, providing documentation for the simple shell
-man_1_simple_shell: A manual page for the simple shell, detailing its usage and features
-[AUTHORS](#AUTHORS): A file listing all individuals who have contributed content to the repository, following the format specified in Docker
+[README.md](#README.md): This file, providing documentation for the simple shell.
+
+[AUTHORS](#AUTHORS): A file listing all individuals who have contributed content to the repository, following the format specified in Docker.
+
 [main.h](#main.h): A header file containing all function prototypes, macros, definintions/includes and global variables.
+
 [main.c](#main.c): An entry point program for the custom shell.
+
 [hell.c](#hell.h): A set of functions needed to execute and tokenize the user input.
+
 [find_path.c](#find_path.c): A function to handle the PATH and FORK.
 </details>
 
