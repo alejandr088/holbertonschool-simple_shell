@@ -36,6 +36,5 @@ Alan Garcia: Handled error conditions and "end of file" condition
 
 Contact
 For any inquiries or issues regarding the simple shell, please contact the project maintainers:
-
 Alejandro Rivello (jrivello21@gmail.com)
 Alan Garcia (avillafan868@gmail.com)

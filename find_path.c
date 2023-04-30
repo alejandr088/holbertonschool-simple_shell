@@ -8,6 +8,7 @@
 char *find_executable_path(char *exe_name)
 {
 	char *path = NULL, **env, *dir = NULL, *exe_path;
+
 	for (env = environ; *env != NULL; env++)
 	{
 		if (strncmp(*env, "PATH=", 5) == 0)
