@@ -14,7 +14,3 @@ int print_env(void)
     }
     return (0);
 }
-int exit_funct(void)
-{
-    exit (0);
-}
