@@ -20,9 +20,9 @@ char *read_line(void);
 char **split_line(char *line);
 int execute_command(char **args);
 char **tokenize(char *input);
+int print_env(void);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 char *find_executable_path(char *exe_name);
-int print_env(void);
 
 /* Global variables */
 extern char **environ;
