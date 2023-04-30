@@ -81,7 +81,7 @@ Some other advanced functions.
 <details>
 <summary> <h3>Compilation</h3> </summary>
 
-<h5>Your shell will be compiled this way:</h5>
+<b>Your shell will be compiled this way:</b>
 
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
@@ -92,7 +92,6 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 <b>The following individuals have contributed to the development of the simple shell:</b>
 
 Alejandro Rivello: Implemented basic command execution logic, implemented built-ins, handled error conditions.
-
 Alan Garcia: Handled error conditions and "end of file" condition.
 </details>
 
