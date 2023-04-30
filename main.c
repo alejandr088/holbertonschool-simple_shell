@@ -38,7 +38,7 @@ int main(void)
 		else if (strcmp(args[0], "exit") == 0)
 		{
 			status = 2;
-			exit (0);
+			exit (2);
 		}
 		else
 		{
