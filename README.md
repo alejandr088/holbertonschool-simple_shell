@@ -26,9 +26,11 @@ This is a simple UNIX command line interpreter, also known as a shell, developed
 <details>
 <summary><h3>Usage</h3></summary>
 <b>To use the simple shell, compile the source files using the provided gcc command:</b>
+
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
-Once compiled, run the shell using the following command (basic mandatory shell):
+<b>Once compiled, run the shell using the following command (basic mandatory shell):</b>
+
 ./hsh
 
 The shell will display a prompt and wait for the user to enter a command. Commands should consist of a single word and should be followed by a new line. After a command has been executed, the prompt will be displayed again, ready for the next command.
