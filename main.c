@@ -24,20 +24,7 @@ int main(void)
 			break;
 
 		args = tokenize(line);
-
-		if (strcmp(args[0], "env") == 0)
-		{
-			char **env_var = environ;
-			while (*env_var != NULL) {
-				printf("%s\n", *env_var);
-				env_var++;
-			}
-			status = 0;
-		}
-		else
-		{
-			status = execute_command(args);
-		}
+		status = execute_command(args);
 
 		free(args);
 	}
