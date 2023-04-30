@@ -28,7 +28,7 @@ int main(void)
 			if (strcmp(args[0], "env") == 0)
 			{
 				char **env_var = environ;
-				
+
 				while (*env_var != NULL)
 				{
 					printf("%s\n", *env_var);
