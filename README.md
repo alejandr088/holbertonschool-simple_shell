@@ -64,10 +64,11 @@ This is a simple UNIX command line interpreter, also known as a shell, developed
 <summary><h3>Usage</h3></summary>
 <b>To use the simple shell, compile the source files using the provided gcc command: </b>
 
-gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+* gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 <b>Once compiled, run the shell using the following command (basic mandatory shell): </b>
-./hsh
+
+* ./hsh
 
 The shell will display a prompt and wait for the user to enter a command. Commands should consist of a single word and should be followed by a new line. After a command has been executed, the prompt will be displayed again, ready for the next command.
 </details>
@@ -84,6 +85,7 @@ The shell will display a prompt and wait for the user to enter a command. Comman
 * Handling the SIGNAL, where user input CTRL+C doesn't exit the program.
 
 <b>The following features are not implemented in the simple shell:</b>
+
 * Handling special characters such as ", ', `, , *, &, #.
 * Handling exit function.
 * Moving the cursor.
@@ -129,14 +131,12 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 </details>
 
-
-
 <details>
 <summary><h3>Contributors</h3></summary>
 <b>The following individuals have contributed to the development of the simple shell:</b>
 
 Alejandro Rivello: Implemented basic command execution logic, implemented built-ins, handled error conditions.
-Alan Garcia: Handled error conditions and "end of file" condition.
+Alan Garcia: Handled error conditions and "EOF" condition.
 </details>
 
 <details>
