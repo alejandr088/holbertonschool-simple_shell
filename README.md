@@ -85,7 +85,7 @@ Handling the SIGNAL, where user input CTRL+C doesn't exit the program.
 Handling special characters such as ", ', `, , *, &, #.
 Handling exit function.
 Moving the cursor.
-Some other advanced functions.
+All advanced functions not menctioned before.
 </details>
 
 <details>

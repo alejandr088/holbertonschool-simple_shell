@@ -13,6 +13,11 @@ int execute_command(char **args)
 
 	if (args == NULL || args[0] == NULL)
 		return (0);
+	if (access(args[0], X_OK) == -1)
+	{
+		fprintf(stderr, "%s: not found\n", args[0]);
+		return 127;
+	}
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -72,4 +77,3 @@ char **tokenize(char *line)
 	tokens[position] = NULL;
 	return (tokens);
 }
-
