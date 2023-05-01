@@ -11,7 +11,7 @@ This is a simple UNIX command line interpreter, also known as a shell, developed
 <details>
 <summary><h3>Requirements</h3></summary>
 
-* Allowed editors: vi, vim, emac* s.
+* Allowed editors: vi, vim, emacs.
 * You are not allowed to use global* variables.
 * No more than 5 functions per file* .
 * It is not necessary to upload the test network to * your repository.
