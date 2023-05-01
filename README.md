@@ -4,7 +4,7 @@
 
 ---
 <details>
-<summary><h3>Project Description</h3></summary>
+<summary><h3>Project description</h3></summary>
 This is a simple UNIX command line interpreter, also known as a shell, developed as part of the holbertonschool-simple_shell project. The shell is designed to be used in a terminal environment and provides basic functionality for executing commands entered by the user.
 </details>
 
@@ -79,6 +79,7 @@ Displaying a prompt and waiting for the user to enter a command.
 Executing commands entered by the user.
 Handling errors, such as command not found.
 Handling the EOF "end of file" condition (Ctrl+D).
+Handling the SIGNAL, where user input CTRL+C doesn't exit the program.
 
 <b>The following features are not implemented in the simple shell:</b>
 Handling special characters such as ", ', `, , *, &, #.
@@ -111,6 +112,8 @@ Some other advanced functions.
   
   $ git clone https://github.com/alejandr088/holbertonschool-simple_shell.git
   
+  // work in your local machine from cloned repo
+
   $ cd holbertonschool-simple_shell
 
 </details>

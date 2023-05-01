@@ -3,6 +3,7 @@
 
 /**
  * handle_sigint - funct to handle signal CTRL+C
+ * @sig: int value
  */
 void handle_sigint(int sig)
 {
