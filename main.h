@@ -18,7 +18,6 @@
 /* Function Declarations */
 int execute_command(char **args);
 char **tokenize(char *input);
-void handle_sigint();
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 
 /* external globals */

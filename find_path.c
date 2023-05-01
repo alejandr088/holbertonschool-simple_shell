@@ -46,3 +46,4 @@ char *find_executable_path(char *exe_name)
 	fprintf(stderr, "%s: 1: %s: not found\n", exe_name, exe_name);
 	return (NULL);
 }
+

@@ -3,10 +3,10 @@
 
 /**
  * handle_sigint - funct to handle signal CTRL+C
- * 
-*/
-void handle_sigint()
+ */
+void handle_sigint(int sig)
 {
+	printf("Received signal %d\n", sig);
 }
 
 /**
@@ -16,7 +16,6 @@ void handle_sigint()
  */
 int main(void)
 {
-
 	char *line = NULL, **args = NULL, *prompt = "($) ";
 	int status = 0;
 	size_t len = 0;
