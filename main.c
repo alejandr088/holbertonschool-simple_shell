@@ -7,7 +7,7 @@
  */
 void handle_sigint(int sig)
 {
-	printf("Received signal %d\n", sig);
+	printf("%d\n", sig);
 }
 
 /**
@@ -17,7 +17,7 @@ void handle_sigint(int sig)
  */
 int main(void)
 {
-	char *line = NULL, **args = NULL, *prompt = "($) ", *cmd;
+	char *line = NULL, **args = NULL, *prompt = "($) ";
 	int status = 0;
 	size_t len = 0;
 	ssize_t read_byte = 0;
@@ -32,31 +32,27 @@ int main(void)
 		read_byte = getline(&line, &len, stdin);
 		if (read_byte == -1)
 			break;
-		cmd = strtok(line, ";");
-		while (cmd != NULL)
-		{
-			args = tokenize(line);
-			if (args[0] != NULL)
-			{
-				if (strcmp(args[0], "env") == 0)
-				{
-					char **env_var = environ;
 
-					while (*env_var != NULL)
-					{
-						printf("%s\n", *env_var);
-						env_var++;
-					}
-					status = 0;
-				}
-				else
+		args = tokenize(line);
+		if (args[0] != NULL)
+		{
+			if (strcmp(args[0], "env") == 0)
+			{
+				char **env_var = environ;
+
+				while (*env_var != NULL)
 				{
-					status = execute_command(args);
+					printf("%s\n", *env_var);
+					env_var++;
 				}
+				status = 0;
 			}
-			free(args);
-			cmd = strtok(NULL, ";");
+			else
+			{
+				status = execute_command(args);
+			}
 		}
+		free(args);
 	}
 	free(line);
 	return (status);
