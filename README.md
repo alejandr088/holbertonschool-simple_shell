@@ -75,17 +75,19 @@ The shell will display a prompt and wait for the user to enter a command. Comman
 <details>
 <summary><h3>Features</h3></summary>
 <b>The simple shell provides the following features: </b>
-Displaying a prompt and waiting for the user to enter a command.
-Executing commands entered by the user.
-Handling errors, such as command not found.
-Handling the EOF "end of file" condition (Ctrl+D).
-Handling the SIGNAL, where user input CTRL+C doesn't exit the program.
+
+* Displaying a prompt and waiting for the user to enter a command.
+* Executing commands entered by the user.
+* Partially handled the PATH.
+* Handling errors, such as command not found.
+* Handling the EOF "end of file" condition (Ctrl+D).
+* Handling the SIGNAL, where user input CTRL+C doesn't exit the program.
 
 <b>The following features are not implemented in the simple shell:</b>
-Handling special characters such as ", ', `, , *, &, #.
-Handling exit function.
-Moving the cursor.
-All advanced functions not menctioned before.
+* Handling special characters such as ", ', `, , *, &, #.
+* Handling exit function.
+* Moving the cursor.
+* All advanced functions not menctioned before.
 </details>
 
 <details>
