@@ -17,7 +17,7 @@ void handle_sigint(int sig)
  */
 int main(void)
 {
-	char *line = NULL, **args = NULL, *prompt = "($) ";
+	char *line = NULL, **args = NULL, *prompt = "($) ", *cmd;
 	int status = 0;
 	size_t len = 0;
 	ssize_t read_byte = 0;
@@ -32,27 +32,31 @@ int main(void)
 		read_byte = getline(&line, &len, stdin);
 		if (read_byte == -1)
 			break;
-
-		args = tokenize(line);
-		if (args[0] != NULL)
+		cmd = strtok(line, ";");
+		while (cmd != NULL)
 		{
-			if (strcmp(args[0], "env") == 0)
+			args = tokenize(line);
+			if (args[0] != NULL)
 			{
-				char **env_var = environ;
-
-				while (*env_var != NULL)
+				if (strcmp(args[0], "env") == 0)
 				{
-					printf("%s\n", *env_var);
-					env_var++;
+					char **env_var = environ;
+
+					while (*env_var != NULL)
+					{
+						printf("%s\n", *env_var);
+						env_var++;
+					}
+					status = 0;
 				}
-				status = 0;
+				else
+				{
+					status = execute_command(args);
+				}
 			}
-			else
-			{
-				status = execute_command(args);
-			}
+			free(args);
+			cmd = strtok(NULL, ";");
 		}
-		free(args);
 	}
 	free(line);
 	return (status);
